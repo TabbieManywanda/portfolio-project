@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %}My Entries{% endblock %}
+
+{% block content %}
+
+<h1 align="center">My Food Journal</h1>
+<h3 align="center">#ProgressReport</h3>
+<ul class="list-group list-group-flush" id="entries">
+    {% for entry in user.entries %}
+    <li class="list-group-item">
+        <small id="passwordHelpInline" class="text-muted">{{ entry.date }}</small>
+        {{ entry.data }}
+        <button type="button" class="close" onClick="deleteNote({{ entry.id }})">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </li>
+    {% endfor %}
+</ul>
+<br>
+<form method="POST">
+    <textarea name="entry" id="entry" class="form-control" placeholder="How are you today?"></textarea>
+    <br>
+    <div align="center">
+        <button type="submit" class="btn btn-primary">Make Entry</button>
+    </div>
+</form>
+
+{% endblock %}
