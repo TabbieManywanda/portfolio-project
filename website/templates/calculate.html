@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block title %}Home{% endblock %}
+
+{% block content %}
+
+<div align="center">
+<div class="container">
+    <div class="box">
+        <h1>BMI Calculator</h1>
+        <form method="POST">
+            <div class="content">
+                <div class="input">
+                    <label for="age">Age</label>
+                    <input type="text" class="text-input" id="age" autocomplete="off" required>
+                </div>
+                <div class="containerHW">
+                    <div class="inputH">
+                        <label for="height">Height(cm)</label>
+                        <input type="text" name="height" id="height" required>
+                    </div>
+                    <div class="inputW">
+                        <label for="weight">Weight(kg)</label>
+                        <input type="text" name="weight" id="weight" required>
+                    </div>
+                </div>
+                <button type="submit" id="bmi" class="btn btn-primary">Get my BMI!</button>
+            </div>
+        </form>
+        <div class="result">
+            <p>Your BMI is:</p>
+            {% if whh %}
+            <div id="result">{{ whh }}</div>
+            {% endif %}
+            <p class="comment"></p>
+        </div>
+    </div>
+    <div id="my_modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <p id="modal-text"></p>
+        </div>
+    </div>
+</div>
+</div>
+
+{% endblock %}

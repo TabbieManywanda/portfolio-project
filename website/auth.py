@@ -17,13 +17,11 @@ def login():
             if check_password_hash(user.password, password):
                 flash('Logged in successfully!', category='success')
                 login_user(user, remember=True)
-                return redirect(url_for('views.home'))
+                return redirect(url_for('views.entries'))
             else:
                 flash('Incorrect password. Try again', category='error')
         else:
             flash('Email address does not exist. Sign up', category='error')
-
-
     return render_template("login.html", user=current_user)
 
 @auth.route('/logout')
@@ -60,6 +58,6 @@ def sign_up():
             db.session.commit()
             login_user(user, remember=True)
             flash('Account created successfully!', category='success')
-            return redirect(url_for('views.home'))
+            return redirect(url_for('views.entries'))
             
     return render_template("signup.html", user=current_user)

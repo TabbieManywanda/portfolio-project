@@ -8,21 +8,36 @@ import json
 views = Blueprint('views', __name__)
 
 @views.route('/', methods=['GET', 'POST'])
-@login_required
 def home():
+    return render_template('home.html', user=current_user)
+
+@views.route('/info', methods=['GET', 'POST'])
+def info():
+    return render_template('info.html', user=current_user)
+
+@views.route('/about_us', methods=['GET', 'POST'])
+def about_us():
+    return render_template('aboutus.html', user=current_user)
+
+
+@views.route('/calculate', methods=['GET', 'POST'])
+@login_required
+def calculate():
+    whh=''
     if request.method == 'POST':
         age = request.form.get('age')
-        height = request.form.get('height')
-        weight = request.form.get('weight')
+        height = float(request.form.get('height'))
+        weight = float(request.form.get('weight'))
+        whh = round(weight / ((height / 100) ** 2), 2)
 
         if weight == 0:
             flash('Weight is too low', category='error')
         else:
-            new_bmi = Bmi(age=age, height=height, weight=weight, user_id=current_user.id)
+            new_bmi = Bmi(age=age, height=height, weight=weight, whh=whh, user_id=current_user.id)
             db.session.add(new_bmi)
             db.session.commit()
             flash('BMI calculated', category='success')
-    return render_template("home.html", user=current_user)
+    return render_template("calculate.html", whh=whh, user=current_user)
 
 @views.route('/entries', methods=['GET', 'POST'])
 @login_required
