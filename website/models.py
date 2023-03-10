@@ -16,6 +16,7 @@ class Bmi(db.Model):
     age = db.Column(db.Integer)
     weight = db.Column(db.Integer)
     height = db.Column(db.Integer)
+    whh = db.Column(db.Integer)
     date = db.Column(db.DateTime(timezone=True), default=func.now())
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
